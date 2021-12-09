@@ -1,0 +1,15 @@
+Bean life cycle in Java Spring:
+
+
+//life cycle process of bean:
+1.The lifecycle of any object means when & how it is born, how it behaves , 
+and when & how it dies
+2.Bean life cycle is managed by the spring container
+3.When we run the program then, first of all, the spring container gets started.
+4.After that, the container creates the instance of a bean as per the request, and
+5.Dependencies are injected
+6. the bean is destroyed when the spring container is closed.
+
+two method ()
+1.init() 
+2.destroy() 

@@ -1,0 +1,53 @@
+//create java project>package>class'MainApp'>class'HelloWorld>src-buildpath-conifg-java buildpath-libraries
+-load>jar files (Spring framework jarfiles and Spring logging jar file download and extract) 
+
+
+
+//MainApp
+package com.kadhir;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class MainApp {
+
+	public static void main(String[] args) {
+	ApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+	//Create Xml file as Beans and load dependency from (Xml configuration spring-copy and paste it)
+	HelloWorld obj= (HelloWorld) context.getBean("helloworld");
+	obj.method();
+	}
+
+}
+
+//HelloWorld
+package com.kadhir;
+
+public class HelloWorld {
+	public void method() {
+		System.out.println("Hello world");
+	}
+
+}
+
+//Beans.xml file
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+//copied from Xml configuration spring
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+//here id is object,class =package.class_name
+//then go to main program and create obj ,get.bean then call the method()
+
+<bean id="helloworld" class="com.kadhir.HelloWorld">
+
+	
+
+
+</bean>
+
+</beans>

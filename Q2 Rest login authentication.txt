@@ -1,0 +1,69 @@
+Rest assignment 22
+
+
+
+package com.kadhir.Security;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
+@SpringBootApplication
+@EnableWebSecurity
+public class RestSecurityApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(RestSecurityApplication.class, args);
+	}
+
+}				
+
+
+
+package security.Controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/rest/auth")	
+public class ApplicationController {
+	
+	@GetMapping("/getMsg")
+	public String greeting(){		
+		return "spring security";
+	}
+
+	
+}
+
+
+package com.kadhir.Security.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+
+@SuppressWarnings("deprecation")
+@Configuration
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
+	
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication().withUser("Kadhiravan").password("password").roles("ADMIN");
+		
+	}
+@Override
+protected void configure(HttpSecurity http) throws Exception {
+	http.csrf().disable();
+	http.authorizeRequests().anyRequest().fullyAuthenticated().and().httpBasic();
+}
+	@Bean
+	public static NoOpPasswordEncoder passwordEncoder() {
+		return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
+	}
+}
